@@ -8,7 +8,7 @@ define([
 	var COLORS = ['red', 'blue', 'green'];
 	var SHAPES = ['triangle', 'square', 'circle'];
 	var PATTERNS = ['solid', 'stripe', 'none'];
-	var QUANTITIES = ['one', 'two', 'three'];
+	var QUANTITIES = [1 ,2 ,3];
 
 	var Deck = Backbone.Collection.extend({
 
@@ -33,11 +33,12 @@ define([
 
 		shuffle: function() {
 			this.models = _.shuffle(this.models);
+			return this;
 		},
 
 		deal: function() {
-			return this.slice(0, 16).map(function(value, index) {
-				value.set({active: true});
+			return this.models.slice(0, 12).map(function(value, index) {
+				return value.set({active: true});
 			});
 		}
 	});
