@@ -32,7 +32,7 @@ require([
     'backbone',
     'card',
     'deck'
-], function (Backbone, Card) {
+], function (Backbone, Card, Deck) {
     Backbone.history.start();
-    console.log(new Deck());
+    window.deck = new Deck();
 });

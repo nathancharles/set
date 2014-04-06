@@ -19,12 +19,12 @@ define([
 				_.each(SHAPES, function(s) {
 					_.each(PATTERNS, function(p) {
 						_.each(QUANTITIES, function(q) {
-							this.add(new Card({
+							this.add({
 								color: c,
 								shape: s,
 								pattern: p,
 								quantity: q
-							}));
+							});
 						}, this);
 					}, this);
 				}, this);
@@ -32,7 +32,7 @@ define([
 		},
 
 		shuffle: function() {
-			return _.shuffle(this);
+			this.models = _.shuffle(this.models);
 		},
 
 		deal: function() {
