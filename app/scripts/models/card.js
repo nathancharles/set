@@ -8,7 +8,7 @@ define([
 			active: false,
 			selected: false
 		},
-		toggle: function() {
+		toggle: function toggle() {
 			this.save({
 				active: !this.get('active')
 			});

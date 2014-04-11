@@ -31,13 +31,13 @@ define([
 			}, this);
 		},
 
-		shuffle: function() {
+		shuffle: function shuffle() {
 			this.models = _.shuffle(this.models);
 			return this;
 		},
 
-		deal: function() {
-			return this.models.slice(0, 12).map(function(value, index) {
+		deal: function deal() {
+			return this.models.slice(0, 12).map(function(value) {
 				return value.set({active: true});
 			});
 		}
