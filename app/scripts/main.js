@@ -23,16 +23,19 @@ require.config({
 		backbone: '../bower_components/backbone/backbone',
 		underscore: '../bower_components/underscore/underscore',
 		bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap',
-		card: 'models/card',
-		deck: 'collections/deck'
+		cardModel: 'models/card',
+		gameModel: 'models/game',
+		playerModel: 'models/player',
+		handCollection: 'collections/hand',
+		deckCollection: 'collections/deck',
+		cardView: 'views/card'
 	}
 });
 
 require([
 	'backbone',
-	'card',
-	'deck'
-], function (Backbone, Card, Deck) {
+	'deckCollection'
+], function (Backbone, Deck) {
 	Backbone.history.start();
 	window.deck = new Deck();
 });

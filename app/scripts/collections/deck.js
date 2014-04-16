@@ -1,7 +1,7 @@
 define([
 	'backbone',
 	'underscore',
-	'card'
+	'cardModel'
 ], function (Backbone, _, Card) {
 	'use strict';
 
