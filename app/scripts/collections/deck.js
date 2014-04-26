@@ -5,25 +5,22 @@ define([
 ], function (Backbone, _, Card) {
 	'use strict';
 
-	var COLORS = ['red', 'blue', 'green'];
-	var SHAPES = ['triangle', 'square', 'circle'];
-	var PATTERNS = ['solid', 'stripe', 'none'];
-	var QUANTITIES = [1 ,2 ,3];
+	var QUANTITY = 3;
 
 	var Deck = Backbone.Collection.extend({
 
 		model: Card,
 
 		initialize: function() {
-			_.each(COLORS, function(c) {
-				_.each(SHAPES, function(s) {
-					_.each(PATTERNS, function(p) {
-						_.each(QUANTITIES, function(q) {
+			_(QUANTITY).times(function(c) {
+				_(QUANTITY).times(function(s) {
+					_(QUANTITY).times(function(p) {
+						_(QUANTITY).times(function(q) {
 							this.add({
-								color: c,
-								shape: s,
-								pattern: p,
-								quantity: q
+								color: c+1,
+								shape: s+1,
+								pattern: p+1,
+								quantity: q+1
 							});
 						}, this);
 					}, this);
@@ -33,12 +30,14 @@ define([
 
 		shuffle: function shuffle() {
 			this.models = _.shuffle(this.models);
+			this.trigger('shuffle');
 			return this;
 		},
 
 		deal: function deal() {
-			return this.models.slice(0, 12).map(function(value) {
-				return value.set({active: true});
+			this.trigger('deal');
+			return this.models.slice(0, 12).map(function(card) {
+				return card.set({'active': true});
 			});
 		}
 	});

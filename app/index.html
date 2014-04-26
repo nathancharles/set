@@ -44,11 +44,10 @@
 
 
 		<script type="text/template" id="card-template">
-			<div class="card <%- color %> <%- shape %> <%- pattern %> <%- quantity %>">
-				<p class="color"><%- color %></p>
-				<p class="shape"><%- shape %></p>
-				<p class="pattern"><%- pattern %></p>
-				<p class="quantity"><%- quantity %></p>
+			<div class="card <%- (selected) ? 'selected' : '' %>">
+				<% _(quantity).times(function() { %>
+					<div class="icon color<%- color %> shape<%- shape %> pattern<%- pattern %>"></div>
+				<% }); %>
 			</div>
 		</script>
 		<script type="text/template" id="hand-template">

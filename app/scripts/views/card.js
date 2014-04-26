@@ -12,17 +12,15 @@ define([
 		initialize: function initialize(card) {
 			this.card = card;
 			_.bindAll(this, 'render');
-			this.card.bind('change', this.render());
-			// this.render();
-
+			this.listenTo(this.card, 'change', this.render);
 		},
 		render: function render() {
-			// this.$el.html(this.template(this.card.toJSON()));
-			// return this;
-			return this.template(this.card.toJSON());
+			this.$el.html(this.template(this.card.toJSON()));
+			// Use this to not have extra container, events are lost though
+			// this.setElement(this.template(this.card.toJSON()));
+			return this;
 		},
 		toggle: function toggle() {
-			console.log('here');
 			this.card.toggleSelected();
 		}
 	});
