@@ -6,7 +6,13 @@ define([
 	'use strict';
 
 	var Hand = Backbone.Collection.extend({
-		model: Card
+		model: Card,
+
+		shuffle: function shuffle() {
+			this.models = _.shuffle(this.models);
+			this.trigger('shuffle');
+			return this;
+		},
 	});
 	return Hand;
 });

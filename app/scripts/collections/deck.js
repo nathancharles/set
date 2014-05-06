@@ -5,17 +5,19 @@ define([
 ], function (Backbone, _, Card) {
 	'use strict';
 
-	var QUANTITY = 3;
+	var ATTRIBUTES = ['color', 'shape', 'pattern', 'quantity'];
+	var ATTRIBUTE_QUANTITY = 3;
 
 	var Deck = Backbone.Collection.extend({
 
 		model: Card,
 
 		initialize: function() {
-			_(QUANTITY).times(function(c) {
-				_(QUANTITY).times(function(s) {
-					_(QUANTITY).times(function(p) {
-						_(QUANTITY).times(function(q) {
+			// TODO: use recursive function
+			_(this.getAttributeQuantity()).times(function(c) {
+				_(this.getAttributeQuantity()).times(function(s) {
+					_(this.getAttributeQuantity()).times(function(p) {
+						_(this.getAttributeQuantity()).times(function(q) {
 							this.add({
 								color: c+1,
 								shape: s+1,
@@ -39,6 +41,12 @@ define([
 			return this.models.slice(0, 12).map(function(card) {
 				return card.set({'active': true});
 			});
+		},
+		getAttributes: function getAttributeQuantity() {
+			return ATTRIBUTES;
+		},
+		getAttributeQuantity: function getAttributeQuantity() {
+			return ATTRIBUTE_QUANTITY;
 		}
 	});
 	return Deck;

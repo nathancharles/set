@@ -5,6 +5,7 @@ define([
 
 	var CardView = Backbone.View.extend({
 		template: _.template($('#card-template').html()),
+		className: 'card',
 		card: null,
 		events: {
 			'click': 'toggle'
@@ -15,9 +16,13 @@ define([
 			this.listenTo(this.card, 'change', this.render);
 		},
 		render: function render() {
+			var isSelected = this.card.get('selected');
 			this.$el.html(this.template(this.card.toJSON()));
-			// Use this to not have extra container, events are lost though
-			// this.setElement(this.template(this.card.toJSON()));
+			if(isSelected) {
+				this.$el.addClass('selected');
+			} else {
+				this.$el.removeClass('selected');
+			}
 			return this;
 		},
 		toggle: function toggle() {
