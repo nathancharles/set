@@ -13,21 +13,29 @@ define([
 		model: Card,
 
 		initialize: function() {
-			// TODO: use recursive function
-			_(this.getAttributeQuantity()).times(function(c) {
-				_(this.getAttributeQuantity()).times(function(s) {
-					_(this.getAttributeQuantity()).times(function(p) {
-						_(this.getAttributeQuantity()).times(function(q) {
-							this.add({
-								color: c+1,
-								shape: s+1,
-								pattern: p+1,
-								quantity: q+1
-							});
-						}, this);
-					}, this);
-				}, this);
-			}, this);
+			var self = this,
+				cardConfigValues = [],
+				cardConfig = {},
+				depth = 1;
+
+			function createCards() {
+				_(ATTRIBUTE_QUANTITY).times(function(x) {
+					cardConfigValues[depth-1] = x+1;
+					if(depth === ATTRIBUTES.length) {
+						// Build Card Config
+						ATTRIBUTES.map(function(value, index) {
+							cardConfig[value] = cardConfigValues[index];
+						});
+						self.add(cardConfig);
+					} else {
+						depth += 1;
+						createCards();
+					}
+				}, self);
+				depth -= 1;
+			}
+
+			createCards();
 		},
 
 		shuffle: function shuffle() {
