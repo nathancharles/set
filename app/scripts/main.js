@@ -26,8 +26,7 @@ require.config({
 		cardModel: 'models/card',
 		gameModel: 'models/game',
 		playerModel: 'models/player',
-		handCollection: 'collections/hand',
-		deckCollection: 'collections/deck',
+		cardsCollection: 'collections/cards',
 		cardView: 'views/card',
 		handView: 'views/hand'
 	}
@@ -35,10 +34,11 @@ require.config({
 
 require([
 	'backbone',
-	'deckCollection',
-	'handView'
-], function (Backbone, Deck, HandView) {
+	'cardsCollection',
+	'handView',
+	'gameModel'
+], function (Backbone, Cards, HandView, Game) {
 	Backbone.history.start();
-	window.deck = new Deck();
-	window.view = new HandView(deck);
+	window.game = new Game();
+	window.view = new HandView(game.deck);
 });

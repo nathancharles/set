@@ -13,9 +13,10 @@ $icon-size: 2em;
 	background-color: #fff;
 	border: 1px solid #333;
 	border-radius: 1em;
-	height: 10em;
-	width: 7em;
+	width: 10em;
+	height: 7em;
 	margin: 0.5em;
+	text-align: center;
 
 	&.selected {
 		-webkit-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.75);
@@ -26,7 +27,8 @@ $icon-size: 2em;
 	.icon {
 		height: $icon-size;
 		width: $icon-size;
-		margin: 0.5em auto;
+		margin: 1em auto;
+		display: inline-block;
 		&.color1 {
 			background-color: red;
 			border: 2px solid red;
@@ -46,7 +48,10 @@ $icon-size: 2em;
 			border-radius: ($icon-size/2);
 		}
 		&.shape3 {
-			width: ($icon-size*2);
+			height: ($icon-size*.75);
+			width: ($icon-size*.75);
+			margin: 1em 0.3em;
+			@include rotate(45deg);
 		}
 
 		&.pattern1 {

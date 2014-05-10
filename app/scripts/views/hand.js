@@ -24,10 +24,14 @@ define([
 			return this;
 		},
 		checkSet: function checkSet() {
-			var areThreeSelected = this.hand.where({selected: true}).length === 3;
-			if(areThreeSelected) {
-				this.validateSet(this.hand.where({selected: true}));
-				this.hand.invoke('set', {selected: false});
+			var selectedCards = this.hand.where({'selected': true});
+			var isValidSet = false;
+			if(selectedCards.length === 3) {
+				isValidSet = this.validateSet(this.hand.where({'selected': true}));
+				this.hand.invoke('set', {'selected': false});
+				if(isValidSet) {
+					void 0;
+				}
 			}
 		},
 		validateSet: function validateSet(cards) {
@@ -57,9 +61,10 @@ define([
 				isAttributeValid(patterns) &&
 				isAttributeValid(quantities)) {
 				alert("it's a set!");
-			} else {
-				alert('try again');
+				return true;
 			}
+			alert('try again');
+			return false;
 		}
 	});
 	return HandView;

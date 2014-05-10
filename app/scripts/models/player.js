@@ -1,12 +1,10 @@
 define([
-	'backbone',
-	'handCollection'
-], function (Backbone, Hand) {
+	'backbone'
+], function (Backbone) {
 	'use strict';
 
 	var Player = Backbone.Model.extend({
 		constructor: function() {
-			this.hand = new Hand();
 		}
 	});
 	return Player;

@@ -5,14 +5,15 @@ define([
 ], function (Backbone, _, Card) {
 	'use strict';
 
-	var Hand = Backbone.Collection.extend({
+	var Deck = Backbone.Collection.extend({
+
 		model: Card,
 
 		shuffle: function shuffle() {
-			this.models = _.shuffle(this.models);
 			this.trigger('shuffle');
+			this.models = _.shuffle(this.models);
 			return this;
-		},
+		}
 	});
-	return Hand;
+	return Deck;
 });
