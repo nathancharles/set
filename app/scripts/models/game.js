@@ -11,20 +11,27 @@ define([
 	var Game = Backbone.Model.extend({
 		constructor: function() {
 			this.deck = new Cards();
+			this.hand = new Cards();
 			this.player = new Player();
 			this.generateDeck();
-			this.deck.shuffle();
-		},
-		hand: function (){
-			return this.deck.where({'active': true});
-		},
-		deal: function() {
-			var numberNeeded = 12 - this.hand().length;
-			this.deck.where({'active': false}).slice(0, numberNeeded).map(function(card) {
-				card.set({'active': true});
-			});
 		}
 	});
+
+	Game.prototype.deal = function deal() {
+		var self = this;
+		var numberNeeded = 12 - self.hand.length;
+		_.times(numberNeeded, function() {
+			self.hand.add(self.deck.pop());
+		});
+	};
+
+	Game.prototype.getAttributeQuantity = function getAttributeQuantity() {
+		return ATTRIBUTE_QUANTITY;
+	};
+
+	Game.prototype.getAttributeTypes = function getAttributeTypes() {
+		return ATTRIBUTES;
+	};
 
 	Game.prototype.generateDeck = function generateDeck() {
 		var self = this,

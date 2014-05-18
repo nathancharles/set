@@ -5,13 +5,7 @@ define([
 
 	var Card = Backbone.Model.extend({
 		defaults: {
-			active: false,
 			selected: false
-		},
-		toggleActive: function toggleActive() {
-			this.set({
-				active: !this.get('active')
-			});
 		},
 		toggleSelected: function toggleSelected() {
 			this.set({
