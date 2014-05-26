@@ -5,6 +5,7 @@ define([
 
 	var Player = Backbone.Model.extend({
 		constructor: function() {
+			this.sets = [];
 		}
 	});
 	return Player;

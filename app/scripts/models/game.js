@@ -13,17 +13,10 @@ define([
 			this.deck = new Cards();
 			this.hand = new Cards();
 			this.player = new Player();
-			this.generateDeck();
+			this.deck.add(generateCardConfigs());
+			this.deck.shuffle();
 		}
 	});
-
-	Game.prototype.deal = function deal() {
-		var self = this;
-		var numberNeeded = 12 - self.hand.length;
-		_.times(numberNeeded, function() {
-			self.hand.add(self.deck.pop());
-		});
-	};
 
 	Game.prototype.getAttributeQuantity = function getAttributeQuantity() {
 		return ATTRIBUTE_QUANTITY;
@@ -33,11 +26,11 @@ define([
 		return ATTRIBUTES;
 	};
 
-	Game.prototype.generateDeck = function generateDeck() {
-		var self = this,
-			cardConfigValues = [],
+	function generateCardConfigs() {
+		var cardConfigValues = [],
 			cardConfig = {},
-			depth = 1;
+			depth = 1,
+			retArr = [];
 
 		function createCards() {
 			_(ATTRIBUTE_QUANTITY).times(function(x) {
@@ -47,16 +40,17 @@ define([
 					ATTRIBUTES.map(function(value, index) {
 						cardConfig[value] = cardConfigValues[index];
 					});
-					self.deck.add(cardConfig);
+					retArr.push(_.clone(cardConfig));
 				} else {
 					depth += 1;
 					createCards();
 				}
-			}, self);
+			});
 			depth -= 1;
 		}
 		createCards();
-	};
+		return retArr;
+	}
 
 	return Game;
 });

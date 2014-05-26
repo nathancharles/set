@@ -12,10 +12,12 @@ define([
 		initialize: function initialize(game) {
 			this.validSets = 0;
 			this.game = game;
+			this.deal();
+
 			this.handView = new CardsView({collection: this.game.hand, el: $('.jumbotron')});
-			this.game.deck.shuffle();
-			this.game.deal();
+
 			this.listenTo(this.game.hand, 'threeSelected', this.checkSet);
+
 			this.render();
 			// this.game.deck.on('change:selected', console.log(event), this);
 		},
@@ -24,10 +26,25 @@ define([
 			this.handView.render();
 			return this;
 		},
+
+		deal: function deal() {
+			var self = this;
+			var numberNeeded = 12 - self.game.hand.length;
+			_.times(numberNeeded, function() {
+				self.game.hand.add(self.game.deck.pop());
+			});
+		},
+
+		givePlayerSet: function givePlayerSet(selectedCards) {
+			this.game.player.sets.push(this.game.hand.remove(selectedCards));
+		},
+
 		checkSet: function checkSet(selectedCards) {
 			var isValidSet = this.validateSet(selectedCards);
 			if(isValidSet) {
 				alert('it\'s a set!');
+				this.givePlayerSet(selectedCards);
+				this.deal();
 			} else {
 				alert('try again!');
 			}
