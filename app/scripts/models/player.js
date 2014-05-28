@@ -4,8 +4,8 @@ define([
 	'use strict';
 
 	var Player = Backbone.Model.extend({
-		constructor: function() {
-			this.sets = [];
+		defaults: {
+			sets: []
 		}
 	});
 	return Player;

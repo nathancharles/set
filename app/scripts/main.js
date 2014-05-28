@@ -29,6 +29,7 @@ require.config({
 		cardsCollection: 'collections/cards',
 		cardView: 'views/card',
 		cardsView: 'views/cards',
+		playerView: 'views/player',
 		gameView: 'views/game'
 	}
 });

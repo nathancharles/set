@@ -3,18 +3,21 @@
 define([
 	'backbone',
 	'underscore',
-	'cardsView'
-], function (Backbone, _, CardsView) {
+	'cardsView',
+	'playerView'
+], function (Backbone, _, CardsView, PlayerView) {
 	'use strict';
 
+	var HAND_SIZE = 12;
+
 	var GameView = Backbone.View.extend({
-		template: _.template($('#hand-template').html()),
 		initialize: function initialize(game) {
 			this.validSets = 0;
 			this.game = game;
 			this.deal();
 
 			this.handView = new CardsView({collection: this.game.hand, el: $('#hand')});
+			this.playerView = new PlayerView({model: this.game.player, el: $('#player')});
 
 			this.listenTo(this.game.hand, 'threeSelected', this.checkSet);
 
@@ -23,12 +26,13 @@ define([
 		},
 		render: function render() {
 			this.handView.render();
+			this.playerView.render();
 			return this;
 		},
 
 		deal: function deal() {
 			var self = this;
-			var numberNeeded = 12 - self.game.hand.length;
+			var numberNeeded = HAND_SIZE - self.game.hand.length;
 			_.times(numberNeeded, function() {
 				self.game.hand.add(self.game.deck.pop());
 			});
@@ -36,7 +40,11 @@ define([
 		},
 
 		givePlayerSet: function givePlayerSet(selectedCards) {
-			this.game.player.sets.push(this.game.hand.remove(selectedCards));
+			// Clone the array, so when it is added back, it isn't seen as the same thing
+			var arr = this.game.player.get('sets').slice(0);
+			arr.push(this.game.hand.remove(selectedCards));
+			this.game.player.set('sets', arr);
+			// this.game.player.set({sets: this.game.player.get('sets').push(this.game.hand.remove(selectedCards))});
 		},
 
 		checkSet: function checkSet(selectedCards) {
