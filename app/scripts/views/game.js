@@ -14,7 +14,7 @@ define([
 			this.game = game;
 			this.deal();
 
-			this.handView = new CardsView({collection: this.game.hand, el: $('.jumbotron')});
+			this.handView = new CardsView({collection: this.game.hand, el: $('#hand')});
 
 			this.listenTo(this.game.hand, 'threeSelected', this.checkSet);
 
@@ -22,7 +22,6 @@ define([
 			// this.game.deck.on('change:selected', console.log(event), this);
 		},
 		render: function render() {
-			this.validSets = this.getValidSets(this.game.hand.models);
 			this.handView.render();
 			return this;
 		},
@@ -33,6 +32,7 @@ define([
 			_.times(numberNeeded, function() {
 				self.game.hand.add(self.game.deck.pop());
 			});
+			this.calculateValidSets(this.game.hand.models);
 		},
 
 		givePlayerSet: function givePlayerSet(selectedCards) {
@@ -90,20 +90,20 @@ define([
 		 * @param {Array} cards - An array of cards to check
 		 * @return {Integer} The number of valid sets the hand contains
 		 */
-		getValidSets : function getValidSets(cards) {
+		calculateValidSets : function calculateValidSets(cards) {
 			var self = this;
-			var validSets = 0;
+			var amount = 0;
 			// TODO: This can be done better
 			for(var i = 0, length = cards.length; i < length; i+=1) {
 				for(var j = i+1; j < length; j+=1) {
 					for(var k = j+1; k < length; k+=1) {
 						if(self.validateSet([cards[i], cards[j], cards[k]])){
-							validSets += 1;
+							amount += 1;
 						}
 					}
 				}
 			}
-			return validSets;
+			this.validSets = amount;
 		}
 	});
 	return GameView;

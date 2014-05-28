@@ -10,6 +10,8 @@ define([
 		initialize: function initialize() {
 			this.cards = this.collection;
 			this.listenTo(this.cards, 'shuffle', this.render);
+			this.listenTo(this.cards, 'add', this.render);
+			this.listenTo(this.cards, 'remove', this.render);
 			this.listenTo(this.cards, 'change', this.checkForThree);
 			// this.render();
 		},
