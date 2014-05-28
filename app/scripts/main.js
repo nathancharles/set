@@ -41,5 +41,5 @@ require([
 ], function (Backbone, Game, GameView) {
 	Backbone.history.start();
 	window.game = new Game();
-	window.view = new GameView(game);
+	window.view = new GameView(window.game);
 });
