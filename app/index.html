@@ -24,29 +24,18 @@
 
 
 		<div class="container">
-			<div class="header">
-				<ul class="nav nav-pills pull-right">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Contact</a></li>
-				</ul>
-				<h3 class="text-muted">Set</h3>
+			<div class="header clearfix" id="player">
 			</div>
 
-			<div id="player" class="player col-sm-2">
-			</div>
-
-			<div id="hand" class="hand col-sm-10 clearfix">
+			<div id="hand" class="hand clearfix">
 			</div>
 
 			<div class="footer">
 				<p><a href="http://nathancharles.net" target="_blank">nathancharles.net</a></p>
 			</div>
-
 		</div>
 
 
-		<!-- TODO: Abstract these out to use attributes defined on deck -->
 		<script type="text/template" id="card-template">
 			<% _(quantity).times(function() { %>
 				<div class="icon color<%- color %> shape<%- shape %> pattern<%- pattern %>"></div>
@@ -54,8 +43,8 @@
 		</script>
 
 		<script type="text/template" id="player-template">
-			<h2>Name</h2>
-			<h4>Sets: <%- sets.length %></h4>
+			<h2 class="text-muted pull-left">Name</h2>
+			<h2 class="lead pull-right">Sets: <%- sets.length %></h2>
 		</script>
 
 
