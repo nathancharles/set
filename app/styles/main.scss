@@ -1,28 +1,42 @@
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
+$screen-sm-min: 625px;
+$screen-xs-max: 625px;
+$container-sm: auto;
 
 @import 'sass-bootstrap/lib/bootstrap';
 $icon-size: 2em;
+
+.container {
+	min-width: 475px;
+}
+
+.card-container {
+	@extend .col-sm-3;
+	@extend .col-xs-4;
+	&.selected {
+		.card {
+			-webkit-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.75);
+			-moz-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.75);
+			box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.75);
+		}
+	}
+}
 
 .card {
 	background-color: #fff;
 	border: 1px solid #333;
 	border-radius: 1em;
-	width: 10em;
+	width: 100%;
 	height: 7em;
-	margin: 0.5em;
+	margin: 0.5em auto;
+	padding: 2.25em 0.5em;
 	text-align: center;
 	float: left;
-
-	&.selected {
-		-webkit-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.75);
-		-moz-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.75);
-		box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.75);
-	}
 
 	.icon {
 		height: $icon-size;
 		width: $icon-size;
-		margin: 1em auto;
+		margin: 0 auto;
 		display: inline-block;
 		&.color1 {
 			background-color: red;
@@ -45,7 +59,7 @@ $icon-size: 2em;
 		&.shape3 {
 			height: ($icon-size*.75);
 			width: ($icon-size*.75);
-			margin: 1em 0.3em;
+			margin: 0.25em ($icon-size/6) 0;
 			@include rotate(45deg);
 		}
 

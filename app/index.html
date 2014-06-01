@@ -37,9 +37,11 @@
 
 
 		<script type="text/template" id="card-template">
-			<% _(quantity).times(function() { %>
-				<div class="icon color<%- color %> shape<%- shape %> pattern<%- pattern %>"></div>
-			<% }); %>
+			<div class="card">
+				<% _(quantity).times(function() { %>
+					<div class="icon color<%- color %> shape<%- shape %> pattern<%- pattern %>"></div>
+				<% }); %>
+			</div>
 		</script>
 
 		<script type="text/template" id="player-template">

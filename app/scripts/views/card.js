@@ -5,7 +5,7 @@ define([
 
 	var CardView = Backbone.View.extend({
 		template: _.template($('#card-template').html()),
-		className: 'card',
+		className: 'card-container',
 		card: null,
 		events: {
 			'click': 'toggle'
