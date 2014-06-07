@@ -1,9 +1,9 @@
-$icon-font-path: "/bower_components/sass-bootstrap/fonts/";
+$icon-font-path: "/bower_components/bootstrap-sass/fonts/";
 $screen-sm-min: 625px;
 $screen-xs-max: 625px;
 $container-sm: auto;
 
-@import 'sass-bootstrap/lib/bootstrap';
+@import 'bootstrap-sass/lib/bootstrap';
 $icon-size: 2em;
 
 .container {
