@@ -306,7 +306,7 @@ module.exports = function (grunt) {
 			'jst',
 			'compass:server',
 			'connect:livereload',
-			'open:server',
+		// 	'open:server',
 			'watch:compass',
 			'watch:livereload'
 		]);

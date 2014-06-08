@@ -37,6 +37,9 @@ define([
 				self.game.hand.add(self.game.deck.pop());
 			});
 			this.calculateValidSets(this.game.hand.models);
+			if(this.validSets === 0){
+				alert('Game Over :(');
+			}
 		},
 
 		givePlayerSet: function givePlayerSet(selectedCards) {
