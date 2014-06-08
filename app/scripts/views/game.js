@@ -38,6 +38,7 @@ define([
 			});
 			this.calculateValidSets(this.game.hand.models);
 			if(this.validSets === 0){
+				// TODO: Use a modal to show this
 				alert('Game Over :(');
 			}
 		},
@@ -53,10 +54,12 @@ define([
 		checkSet: function checkSet(selectedCards) {
 			var isValidSet = this.validateSet(selectedCards);
 			if(isValidSet) {
+				// TODO: Use a different method to show this
 				alert('it\'s a set!');
 				this.givePlayerSet(selectedCards);
 				this.deal();
 			} else {
+				// TODO: Use a different method to show this
 				alert('try again!');
 			}
 		},
