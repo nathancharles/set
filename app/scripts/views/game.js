@@ -40,6 +40,7 @@ define([
 			if(this.validSets === 0){
 				// TODO: Use a modal to show this
 				alert('Game Over :(');
+				this.reset();
 			}
 		},
 
@@ -118,6 +119,10 @@ define([
 				}
 			}
 			this.validSets = amount;
+		},
+		reset: function reset() {
+			this.game.constructor();
+			this.initialize(this.game)
 		}
 	});
 	return GameView;
