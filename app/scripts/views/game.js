@@ -39,7 +39,7 @@ define([
 			this.calculateValidSets(this.game.hand.models);
 			if(this.validSets === 0){
 				// TODO: Use a modal to show this
-				alert('Game Over :(');
+				alert('Game Over. There are no more sets.');
 				this.reset();
 			}
 		},
@@ -56,12 +56,12 @@ define([
 			var isValidSet = this.validateSet(selectedCards);
 			if(isValidSet) {
 				// TODO: Use a different method to show this
-				alert('it\'s a set!');
+				this.game.player.set('message', {type: 'success', text: 'It\'s a set!'});
 				this.givePlayerSet(selectedCards);
 				this.deal();
 			} else {
 				// TODO: Use a different method to show this
-				alert('try again!');
+				this.game.player.set('message', {type: 'danger', text: 'Try again!'});
 			}
 		},
 		/**
@@ -122,7 +122,7 @@ define([
 		},
 		reset: function reset() {
 			this.game.constructor();
-			this.initialize(this.game)
+			this.initialize(this.game);
 		}
 	});
 	return GameView;

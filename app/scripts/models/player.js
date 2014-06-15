@@ -5,7 +5,8 @@ define([
 
 	var Player = Backbone.Model.extend({
 		defaults: {
-			sets: []
+			sets: [],
+			message: {}
 		}
 	});
 	return Player;

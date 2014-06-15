@@ -2,7 +2,7 @@
 	"name": "set",
 	"version": "0.0.0",
 	"dependencies": {
-		"bootstrap-sass": "~3.0.2",
+		"bootstrap-sass-official": "3.1.1",
 		"jquery": "~2.1.0",
 		"underscore": "~1.6.0",
 		"backbone": "~1.1.0",

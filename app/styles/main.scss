@@ -10,6 +10,10 @@ $icon-size: 2em;
 	min-width: 475px;
 }
 
+.message {
+	@extend .col-xs-6;
+}
+
 .card-container {
 	@extend .col-sm-3;
 	@extend .col-xs-4;
