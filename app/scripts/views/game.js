@@ -54,16 +54,21 @@ define([
 
 		checkSet: function checkSet(selectedCards) {
 			var setValidation = this.setValidation(selectedCards);
+			var message;
+			var messageClass;
 
 			if(setValidation.isValid) {
 				// TODO: Use a different method to show this
-				this.game.player.set('message', {class: 'success', text: 'It\'s a set!'});
+				message = 'It\'s a set!';
+				messageClass = 'success';
 				this.givePlayerSet(selectedCards);
 				this.deal();
 			} else {
 				// TODO: Use a different method to show this
-				this.game.player.set('message', {class: 'danger', text: 'Try again!'});
+				message = 'Try Again!';
+				messageClass = 'danger';
 			}
+			this.game.player.set('message', {class: messageClass, text: message});
 		},
 		/**
 		 * Validate a set of given cards
