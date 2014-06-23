@@ -53,8 +53,9 @@ define([
 		},
 
 		checkSet: function checkSet(selectedCards) {
-			var isValidSet = this.validateSet(selectedCards);
-			if(isValidSet) {
+			var setValidation = this.setValidation(selectedCards);
+
+			if(setValidation.isValid) {
 				// TODO: Use a different method to show this
 				this.game.player.set('message', {type: 'success', text: 'It\'s a set!'});
 				this.givePlayerSet(selectedCards);
@@ -68,37 +69,33 @@ define([
 		 * Validate a set of given cards
 		 * A group of cards is a valid set if, for each of the different attributes, the attributes are all the same or all different.
 		 * @param {Array} cards - An array of cards to check
-		 * @return {Boolean} If the set of cards makes a valid set
+		 * @return {Object} If the set of cards makes a valid set
 		 */
-		validateSet: function validateSet(cards) {
+		setValidation: function setValidation(cards) {
 			var self = this;
+			var attributeTypes = this.game.getAttributeTypes();
+			var validation = {};
 
 			function isAttributeValid(attributes) {
 				attributes = _.uniq(attributes);
 				return attributes.length === 1 || attributes.length === self.game.getAttributeQuantity();
 			}
 
-			// TODO: abstract to attribute values on collection
-
-			var colors = [],
-			shapes = [],
-			patterns = [],
-			quantities = [];
-
 			_.each(cards, function(card) {
-				colors.push(card.get('color'));
-				shapes.push(card.get('shape'));
-				patterns.push(card.get('pattern'));
-				quantities.push(card.get('quantity'));
+				_.each(attributeTypes, function(type) {
+					validation[type] = validation[type] || [];
+					validation[type].push(card.get(type));
+				});
+
 			});
 
-			if(isAttributeValid(colors) &&
-				isAttributeValid(shapes) &&
-				isAttributeValid(patterns) &&
-				isAttributeValid(quantities)) {
-				return true;
-			}
-			return false;
+			_.each(attributeTypes, function(type) {
+				validation[type] = isAttributeValid(validation[type]);
+			});
+			
+			validation.isValid = !_.contains(_.values(validation), false);
+
+			return validation;
 		},
 		/**
 		 * Get the count of valid sets in given cards
@@ -112,7 +109,7 @@ define([
 			for(var i = 0, length = cards.length; i < length; i+=1) {
 				for(var j = i+1; j < length; j+=1) {
 					for(var k = j+1; k < length; k+=1) {
-						if(self.validateSet([cards[i], cards[j], cards[k]])){
+						if(self.setValidation([cards[i], cards[j], cards[k]]).isValid){
 							amount += 1;
 						}
 					}
