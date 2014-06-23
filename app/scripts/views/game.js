@@ -57,12 +57,12 @@ define([
 
 			if(setValidation.isValid) {
 				// TODO: Use a different method to show this
-				this.game.player.set('message', {type: 'success', text: 'It\'s a set!'});
+				this.game.player.set('message', {class: 'success', text: 'It\'s a set!'});
 				this.givePlayerSet(selectedCards);
 				this.deal();
 			} else {
 				// TODO: Use a different method to show this
-				this.game.player.set('message', {type: 'danger', text: 'Try again!'});
+				this.game.player.set('message', {class: 'danger', text: 'Try again!'});
 			}
 		},
 		/**
